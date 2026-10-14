@@ -4,21 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Eat Well, Spend Less — A budget cookbook that pays for itself{% endblock %}</title>
-  <meta name="description" content="A practical e-book of 50+ budget recipes, weekly meal plans, and grocery-shopping tactics for eating well on $45–$50 a week. By Sharon Inguane & Andile Cossa.">
-  <meta property="og:title" content="Eat Well, Spend Less">
-  <meta property="og:description" content="Healthy eating without breaking the bank — 50+ recipes, four weekly meal plans, and a shopping system built to save you $10–20 a week.">
+  <meta name="description" content="{% block description %}A practical e-book of 50+ budget recipes, weekly meal plans, and grocery-shopping tactics for eating well on $45–$50 a week. By Sharon Inguane & Andile Cossa.{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}Eat Well, Spend Less{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Healthy eating without breaking the bank — 50+ recipes, four weekly meal plans, and a shopping system built to save you $10–20 a week.{% endblock %}">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+  {% if plausible_domain %}
+  <script defer data-domain="{{ plausible_domain }}" src="https://plausible.io/js/script.js"></script>
+  <script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };</script>
+  {% endif %}
 </head>
 <body>
   {% include "components/navbar.html" %}
-  <main>
+  <main id="main">
     {% block content %}{% endblock %}
   </main>
   {% include "components/footer.html" %}
+  {% block overlays %}{% endblock %}
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
 </body>
 </html>

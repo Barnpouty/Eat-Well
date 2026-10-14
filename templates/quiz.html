@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Grocery Budget Check-In — Eat Well, Spend Less{% endblock %}
+{% block description %}A quick, judgment-free quiz about your grocery habits, with a personalised check-in and simple first steps to make your money go further.{% endblock %}
+{% block og_title %}Your Grocery Budget Check-In — Eat Well, Spend Less{% endblock %}
+{% block og_description %}Eight quick questions. No judgment. Just practical steps toward eating well while spending less.{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+{% endblock %}
+
+{% block content %}
+{% include "components/quiz_core.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quiz-data.js') }}"></script>
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

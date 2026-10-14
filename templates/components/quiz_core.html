@@ -1,0 +1,60 @@
+{% include "components/icons.html" %}
+
+<div class="qz" id="quiz" data-mode="{{ 'gate' if gate_mode else 'page' }}"
+     data-checkout="{{ checkout_url }}"
+     data-price="{{ product_price }}"
+     data-email="{{ 'true' if email_enabled else 'false' }}"
+     data-cover="{{ url_for('static', filename='images/cover_full.jpg') }}"
+     data-home="{{ url_for('index') }}">
+
+  {% include "components/quiz_intro.html" %}
+
+  <!-- Quiz stage -->
+  <section class="qz-app" id="qz-app" hidden aria-label="Grocery Budget Check-In quiz">
+    <div class="qz-app__inner">
+      {% if not gate_mode %}<h1 class="sr-only">Grocery Budget Check-In</h1>{% endif %}
+      <div class="qz-guide">
+        <div class="qz-guide__avatar" id="qz-avatar" aria-hidden="true"></div>
+        <p class="qz-bubble" id="qz-bubble"></p>
+      </div>
+
+      <div class="qz-progress">
+        <p class="qz-progress__label" id="qz-progress-label"></p>
+        <div class="qz-progress__track" id="qz-progress" role="progressbar" aria-label="Quiz progress"
+             aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+          <span class="qz-progress__fill" id="qz-progress-fill"></span>
+        </div>
+      </div>
+
+      <div class="qz-panel" id="qz-panel"></div>
+
+      <p class="qz-error" id="qz-error" role="alert" hidden></p>
+
+      <div class="qz-nav">
+        <button type="button" class="qz-back" id="qz-back">
+          <svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> Back
+        </button>
+        <button type="button" class="btn btn--olive" id="qz-next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transition -->
+  <section class="qz-loading" id="qz-loading" hidden aria-live="polite">
+    <div class="qz-loading__avatar" id="qz-loading-avatar" aria-hidden="true"></div>
+    <h2 class="qz-loading__title">Let's put the pieces together…</h2>
+    <p class="qz-loading__step" id="qz-loading-step"></p>
+  </section>
+
+  <!-- Results (built by quiz.js) -->
+  <div id="qz-results" hidden tabindex="-1"></div>
+
+  <noscript>
+    <div class="qz-noscript">
+      <h2>This quiz needs JavaScript</h2>
+      <p>Please turn on JavaScript to take the Grocery Budget Check-In. In the meantime, you can read about the book on the <a href="{{ url_for('index') }}">main page</a>.</p>
+    </div>
+  </noscript>
+</div>
+
+<template id="tpl-avatar">{% include "components/avatar.html" %}</template>

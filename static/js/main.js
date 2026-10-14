@@ -9,3 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".hero");
   if (hero) hero.classList.add("hero--visible");
 });
+
+// Privacy-friendly analytics for checkout clicks (only if analytics is configured;
+// sends the button's location, never anything about the visitor).
+document.addEventListener("click", (e) => {
+  const a = e.target.closest && e.target.closest("a[data-checkout]");
+  if (a && typeof window.plausible === "function") {
+    try { window.plausible("Checkout Click", { props: { location: a.getAttribute("data-checkout") } }); } catch (err) { /* ignore */ }
+  }
+});

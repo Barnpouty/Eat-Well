@@ -1,0 +1,177 @@
+/* ---------------------------------------------------------
+   Required check-in popup (home page)
+   Hidden unless <html class="gate-pending"> is set by the early
+   inline script, so visitors without JavaScript, and anyone who
+   has already completed it, never see it.
+--------------------------------------------------------- */
+.gate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(31, 42, 36, 0.8);
+  padding: clamp(0px, 3vw, 32px);
+}
+html.gate-pending .gate { display: flex; }
+html.gate-pending,
+html.gate-pending body { overflow: hidden; }
+.gate:focus { outline: none; }
+
+.gate__panel {
+  margin: auto;
+  width: 100%;
+  max-width: 980px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.45);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.gate-pending .gate__panel { animation: gate-in 0.4s ease both; }
+}
+@keyframes gate-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.gate__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 16px;
+  padding: 14px clamp(18px, 4vw, 36px);
+  border-bottom: 1px solid var(--line);
+}
+.gate__brand { font-family: var(--serif); font-weight: 600; color: var(--ink); }
+.gate__note { font-size: 0.85rem; color: var(--ink-soft); }
+
+/* Phones: the popup becomes a full-screen sheet */
+@media (max-width: 640px) {
+  .gate { padding: 0; }
+  .gate__panel { min-height: 100%; border: 0; border-radius: 0; box-shadow: none; }
+}
+
+/* ---- the quiz screens, tightened to sit inside the dialog ---- */
+.gate .qz-intro__inner {
+  max-width: none;
+  padding: clamp(20px, 4vw, 40px) clamp(18px, 4vw, 36px) clamp(26px, 4vw, 44px);
+  gap: 22px;
+}
+.gate .qz-intro__title { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
+.gate .qz-intro__title:focus { outline: none; }
+.gate .qz-scene { max-width: 340px; }
+@media (min-width: 820px) {
+  .gate .qz-intro__inner { grid-template-columns: 1.15fr 0.85fr; gap: 36px; }
+  .gate .qz-scene { max-width: none; }
+}
+.gate .qz-app__inner { padding: 22px clamp(18px, 4vw, 36px) 28px; }
+.gate .qz-loading { padding: clamp(44px, 9vw, 90px) clamp(18px, 4vw, 36px); }
+
+/* ---- closing message ---- */
+.gres {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(22px, 4vw, 40px) clamp(18px, 4vw, 36px) clamp(28px, 4vw, 44px);
+}
+.gres__guide { margin-bottom: 20px; }
+.gres__title {
+  font-size: clamp(1.8rem, 4.2vw, 2.7rem);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.45em;
+}
+.gres__title:focus { outline: none; }
+.gres__lead { font-size: 1.05rem; color: var(--ink); max-width: 60ch; }
+.gres__body { max-width: 60ch; }
+
+.gres__solves {
+  list-style: none;
+  margin: 22px 0 22px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.gres__solves li {
+  display: flex;
+  gap: 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+.gres__solves .icon { color: var(--olive); margin-top: 3px; }
+.gres__solves h3 { font-size: 1.05rem; margin: 0 0 0.2em; }
+.gres__solves p { margin: 0; font-size: 0.95rem; }
+
+.gres__try {
+  margin: 0 0 26px;
+  padding: 14px 16px;
+  background: var(--sand);
+  border-left: 3px solid var(--olive);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.gres__bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+}
+.gres__bar .btn { width: 100%; }
+@media (min-width: 560px) { .gres__bar .btn { width: auto; } }
+.gres__fine { margin: 6px 0 0; font-size: 0.88rem; max-width: 56ch; }
+.gres__disclaimer { margin: 22px 0 0; font-size: 0.8rem; color: var(--ink-soft); }
+
+/* ---------------------------------------------------------
+   The home page, once it has been personalised
+--------------------------------------------------------- */
+section[id] { scroll-margin-top: 72px; }
+
+.foryou {
+  background: var(--olive);
+  color: var(--paper);
+}
+.foryou__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 12px var(--pad);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+.foryou__text { margin: 0; color: var(--paper); font-size: 0.95rem; }
+.foryou__text strong { color: var(--paper); }
+.foryou__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px; }
+.foryou__go { color: var(--paper); font-weight: 600; font-size: 0.92rem; text-underline-offset: 3px; }
+.foryou__go:hover { color: #fff; }
+.foryou__retake {
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 0.88rem;
+  color: #DCE4D6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.foryou__retake:hover { color: #fff; }
+.foryou a:focus-visible, .foryou button:focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; }
+
+.toc__item.is-foryou {
+  background: rgba(75, 93, 58, 0.07);
+  box-shadow: inset 3px 0 0 var(--olive);
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.toc__pick {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--berry-deep);
+}
