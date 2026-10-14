@@ -5,10 +5,11 @@
       <p class="footer__by">By Sharon Inguane &amp; Andile Cossa</p>
     </div>
     <nav class="footer__links" aria-label="Footer">
-      <a href="#inside">What's inside</a>
-      <a href="#recipes">Sample recipes</a>
-      <a href="#budget">The budget</a>
-      <a href="#faq">FAQ</a>
+      <a href="{{ url_for('index') }}#inside">What's inside</a>
+      <a href="{{ url_for('index') }}#recipes">Sample recipes</a>
+      <a href="{{ url_for('index') }}#budget">The budget</a>
+      <a href="{{ url_for('quiz') }}">Grocery quiz</a>
+      <a href="{{ url_for('index') }}#faq">FAQ</a>
     </nav>
     <div class="footer__legal">
       <p>&copy; <span id="year"></span> Eat Well, Spend Less. All recipes and content are original to the e-book.</p>

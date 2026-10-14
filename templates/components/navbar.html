@@ -1,12 +1,13 @@
 <header class="nav" id="site-nav">
   <div class="nav__inner">
-    <a href="#top" class="nav__mark">Eat Well, Spend Less</a>
+    <a href="{{ url_for('index') }}" class="nav__mark">Eat Well, Spend Less</a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#inside">What's inside</a>
-      <a href="#recipes">Sample recipes</a>
-      <a href="#budget">The budget</a>
-      <a href="#faq">FAQ</a>
+      <a href="{{ url_for('index') }}#inside">What's inside</a>
+      <a href="{{ url_for('index') }}#recipes">Sample recipes</a>
+      <a href="{{ url_for('index') }}#budget">The budget</a>
+      <a href="{{ url_for('quiz') }}">Grocery quiz</a>
+      <a href="{{ url_for('index') }}#faq">FAQ</a>
     </nav>
-    <a href="{{ checkout_url }}" class="btn btn--small nav__cta">Get the e-book</a>
+    <a href="{{ checkout_url }}" class="btn btn--small nav__cta" data-checkout="nav">Get the e-book</a>
   </div>
 </header>

@@ -1,0 +1,68 @@
+<section class="qz-intro" id="qz-intro" aria-labelledby="qz-intro-title">
+  <div class="qz-intro__inner">
+    <div class="qz-intro__text">
+      <p class="qz-kicker">Grocery Budget Check-In</p>
+      {% set hl = "h2" if gate_mode else "h1" %}<{{ hl }} id="qz-intro-title" class="qz-intro__title" tabindex="-1">Your grocery budget shouldn't cost you your peace of mind.</{{ hl }}>
+      <p>Have you ever bought groceries, tried to make your money last, and still wondered where it all went? Or wanted to eat healthier but felt that doing so would cost too much?</p>
+      <p>You're not alone. And you don't have to figure everything out today.</p>
+      <p>Take this quick, judgment-free quiz to discover your grocery spending habits and find simple ways to make your money go further, without giving up meals you love.</p>
+      <div class="qz-intro__actions">
+        <button type="button" class="btn btn--olive btn--large" id="qz-start">Let's Find My Savings Potential</button>
+        <p class="qz-reassure">Only a few quick questions. No judgment. Just practical steps forward.</p>
+      </div>
+    </div>
+
+    <div class="qz-scene" aria-hidden="true">
+      <svg class="qz-scene__svg" viewBox="0 0 480 346" focusable="false">
+        <!-- avatar (stands behind the counter) -->
+        {% with avatar_xywh='x="140" y="22" width="270" height="297"' %}{% include "components/avatar.html" %}{% endwith %}
+
+        <!-- counter -->
+        <rect x="0" y="302" width="480" height="44" fill="#E7DCC3"/>
+        <rect x="0" y="302" width="480" height="5" fill="#D8CFBB"/>
+
+        <!-- basket with produce (left) -->
+        <g class="scene-basket">
+          <path d="M36 216 C36 140 150 140 150 216" fill="none" stroke="#B58F52" stroke-width="6" stroke-linecap="round"/>
+          <path d="M22 232 L16 232 L40 304 L130 304 L152 232 Z" fill="#C9A56B"/>
+          <path d="M28 252 L146 252 M33 272 L141 272 M38 290 L136 290" stroke="#B58F52" stroke-width="2.500"/>
+          <path d="M60 232 L52 304 M84 232 L82 304 M108 232 L112 304" stroke="#B58F52" stroke-width="2.500"/>
+          <rect x="14" y="224" width="142" height="12" rx="5" fill="#B58F52"/>
+          <circle cx="48" cy="216" r="17" fill="#C8442F"/><path d="M42 202 l6 5 l6 -5" fill="none" stroke="#4F6F35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="84" cy="210" r="18" fill="#D2543A"/><path d="M78 195 l6 5 l6 -5" fill="none" stroke="#4F6F35" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="119" cy="217" r="16" fill="#C8442F"/><path d="M113 203 l6 5 l6 -5" fill="none" stroke="#4F6F35" stroke-width="3" stroke-linecap="round"/>
+          <path d="M70 200 C58 170 76 152 90 148 C98 170 90 188 84 200Z" fill="#5E8040"/>
+          <path d="M92 204 C92 176 108 164 118 162 C120 184 110 196 104 204Z" fill="#7BA052"/>
+          <path d="M120 206 L142 160 L150 166 L130 212Z" fill="#D9732A"/>
+          <path d="M142 160 L138 148 M142 160 L148 150 M142 160 L150 158" stroke="#5E8040" stroke-width="3" stroke-linecap="round"/>
+        </g>
+
+        <!-- coin stack (right) -->
+        <g>
+          <ellipse cx="432" cy="296" rx="26" ry="8" fill="#B8923C"/>
+          <rect x="406" y="282" width="52" height="14" fill="#E6C36A"/>
+          <ellipse cx="432" cy="282" rx="26" ry="8" fill="#F0D17F"/>
+          <ellipse cx="432" cy="272" rx="26" ry="8" fill="#B8923C"/>
+          <rect x="406" y="258" width="52" height="14" fill="#E6C36A"/>
+          <ellipse cx="432" cy="258" rx="26" ry="8" fill="#F0D17F"/>
+        </g>
+
+        <!-- floating savings symbols -->
+        <g class="scene-coin scene-coin--a">
+          <circle cx="418" cy="120" r="17" fill="#F0D17F" stroke="#B8923C" stroke-width="2.500"/>
+          <text x="418" y="127" text-anchor="middle" font-family="Inter, sans-serif" font-size="19" font-weight="700" fill="#8A6A1F">$</text>
+        </g>
+        <g class="scene-coin scene-coin--b">
+          <circle cx="452" cy="178" r="12" fill="#F0D17F" stroke="#B8923C" stroke-width="2"/>
+          <text x="452" y="183" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#8A6A1F">$</text>
+        </g>
+        <g class="scene-coin scene-coin--c">
+          <circle cx="86" cy="96" r="13" fill="#F0D17F" stroke="#B8923C" stroke-width="2"/>
+          <text x="86" y="101" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#8A6A1F">$</text>
+        </g>
+        <path d="M336 60 C352 56 366 66 368 80 C352 84 340 76 336 60Z" fill="#7BA052"/>
+        <path d="M24 150 C36 142 48 146 52 158 C40 164 28 160 24 150Z" fill="#7BA052" opacity=".8"/>
+      </svg>
+    </div>
+  </div>
+</section>

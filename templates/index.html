@@ -1,12 +1,67 @@
 {% extends "base.html" %}
+
+{% block head %}
+{% if quiz_gate %}
+<style>.gate{display:none}html.gate-pending .gate{display:flex}</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gate.css') }}">
+<script>
+  /* Show the required check-in on a first visit. Only a small "completed" flag
+     (level + theme, never answers) is remembered on this device for 30 days. */
+  (function () {
+    try {
+      var g = JSON.parse(localStorage.getItem("ewsl_gate") || "null");
+      if (g && g.v === 1 && Date.now() - g.ts < 2592e6) return;
+    } catch (e) {}
+    document.documentElement.classList.add("gate-pending");
+  })();
+</script>
+{% endif %}
+{% endblock %}
+
 {% block content %}
+  {% if quiz_gate %}
+  <aside class="foryou" id="foryou" hidden aria-label="Picked for you">
+    <div class="foryou__inner">
+      <p class="foryou__text"><strong>Picked for you:</strong> <span id="foryou-text"></span></p>
+      <div class="foryou__actions">
+        <a class="foryou__go" id="foryou-go" href="#inside">Start here &darr;</a>
+        <button type="button" class="foryou__retake" id="foryou-retake">Retake the quiz</button>
+      </div>
+    </div>
+  </aside>
+  {% endif %}
   {% include "components/hero.html" %}
   {% include "components/problem.html" %}
   {% include "components/inside.html" %}
   {% include "components/recipes.html" %}
   {% include "components/budget.html" %}
   {% include "components/audience.html" %}
+  {% if not quiz_gate %}{% include "components/quiz_teaser.html" %}{% endif %}
   {% include "components/authors.html" %}
   {% include "components/faq.html" %}
   {% include "components/final_cta.html" %}
+{% endblock %}
+
+{% block overlays %}
+{% if quiz_gate %}
+<div class="gate" id="gate" role="dialog" aria-modal="true" tabindex="-1"
+     aria-label="Grocery Budget Check-In. Please answer a few quick questions to continue to the website.">
+  <div class="gate__panel">
+    <div class="gate__bar">
+      <span class="gate__brand">Eat Well, Spend Less</span>
+      <span class="gate__note">A quick check-in, then the site is yours</span>
+    </div>
+    {% with gate_mode=True %}{% include "components/quiz_core.html" %}{% endwith %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if quiz_gate %}
+<script src="{{ url_for('static', filename='js/quiz-data.js') }}"></script>
+<script src="{{ url_for('static', filename='js/gate.js') }}"></script>
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endif %}
 {% endblock %}
